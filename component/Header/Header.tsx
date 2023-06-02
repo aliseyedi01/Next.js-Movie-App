@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import MovieIcon from "@mui/icons-material/Movie";
 import Link from "next/link";
+import NextLink from "next/link";
 
 const pages = [
   { title: "Home", href: "/" },
@@ -35,24 +36,24 @@ function ResponsiveAppBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <MovieIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Link href="/">
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              Movies
-            </Typography>
-          </Link>
+
+          <Typography
+            variant="h6"
+            noWrap
+            component={NextLink}
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            Movies
+          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -84,9 +85,9 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page.title} onClick={handleCloseNavMenu}>
-                  <Link key={page.title} href={page.href}>
-                    <Typography textAlign="center">{page.title}</Typography>
-                  </Link>
+                  <Typography component={NextLink} href={page.href} textAlign="center">
+                    {page.title}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -95,7 +96,8 @@ function ResponsiveAppBar() {
           <Typography
             variant="h5"
             noWrap
-            component="a"
+            component={NextLink}
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -111,15 +113,15 @@ function ResponsiveAppBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Link key={page.title} href={page.href}>
-                <Button
-                  key={page.title}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {page.title}
-                </Button>
-              </Link>
+              <Button
+                key={page.title}
+                component={NextLink}
+                href={page.href}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                {page.title}
+              </Button>
             ))}
           </Box>
         </Toolbar>
