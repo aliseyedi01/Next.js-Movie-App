@@ -28,16 +28,15 @@ export default function Home({ movies }: InferGetServerSidePropsType<typeof getS
                   gutterBottom
                   variant="h5"
                   component="div"
-                  className="w-52 truncate  text-lg"
+                  className="w-52 truncate font-sigmar text-lg"
                 >
                   {movie.title}
                 </Typography>
-
-                <Typography>
+                <Typography className="font-ubuntu">
                   <CalendarMonthIcon /> Years: {movie.year}
                 </Typography>
-                <Typography>
-                  <PublicIcon /> Country:{movie.country}
+                <Typography className="font-ubuntu">
+                  <PublicIcon /> Country: {movie.country}
                 </Typography>
               </CardContent>
               <CardActions className="flex flex-row-reverse justify-between">

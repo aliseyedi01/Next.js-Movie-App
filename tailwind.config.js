@@ -6,7 +6,12 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        ubuntu: ["var(--font-ubuntu)"],
+        sigmar: ["var(--font-sigmar)"],
+      },
+    },
   },
   plugins: [],
 };
