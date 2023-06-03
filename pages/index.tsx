@@ -12,6 +12,9 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import Pagination from "@mui/material/Pagination";
 import { useRouter } from "next/router";
 import { HomeProps } from "@/types/Movie";
+import Image from "next/image";
+import { Suspense } from "react";
+import { Skeleton } from "@mui/material";
 
 export default function Home({ movies }: HomeProps): JSX.Element {
   const router = useRouter();
@@ -26,12 +29,24 @@ export default function Home({ movies }: HomeProps): JSX.Element {
         {movies.map((movie) => (
           <li key={movie.id}>
             <Card sx={{ maxWidth: 345 }}>
-              <CardMedia
-                component="img"
-                alt="movies"
-                image={movie.poster}
-                className="grayscale hover:grayscale-0"
-              />
+              <Suspense
+                fallback={
+                  <Skeleton
+                    sx={{ bgcolor: "grey.900" }}
+                    variant="rectangular"
+                    width={250}
+                    height={340}
+                  />
+                }
+              >
+                <Image
+                  src={movie.poster}
+                  alt="movie"
+                  className="grayscale hover:grayscale-0"
+                  width={345}
+                  height={550}
+                />
+              </Suspense>
               <CardContent>
                 <Typography
                   gutterBottom
@@ -41,11 +56,11 @@ export default function Home({ movies }: HomeProps): JSX.Element {
                 >
                   {movie.title}
                 </Typography>
-                <Typography className="font-ubuntu">
-                  <CalendarMonthIcon /> Years: {movie.year}
+                <Typography className="font-ubuntu text-sm">
+                  <CalendarMonthIcon className="text-xl" /> Years: {movie.year}
                 </Typography>
-                <Typography className="font-ubuntu">
-                  <PublicIcon /> Country: {movie.country}
+                <Typography className="w-52 truncate font-ubuntu text-sm">
+                  <PublicIcon className="text-xl" /> Country: {movie.country}
                 </Typography>
               </CardContent>
               <CardActions className="flex flex-row-reverse justify-between">
