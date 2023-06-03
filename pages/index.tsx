@@ -9,8 +9,17 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import PublicIcon from "@mui/icons-material/Public";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import Pagination from "@mui/material/Pagination";
+import { useRouter } from "next/router";
+import { HomeProps } from "@/types/Movie";
 
-export default function Home({ movies }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home({ movies }: HomeProps): JSX.Element {
+  const router = useRouter();
+
+  const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+    router.push(`/?page=${page}`);
+  };
+
   return (
     <div>
       <ul className="  lg:grid-cols-5ssss grid grid-cols-1 place-items-center gap-3 p-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5  ">
@@ -49,14 +58,18 @@ export default function Home({ movies }: InferGetServerSidePropsType<typeof getS
           </li>
         ))}
       </ul>
+      <div className="grid place-content-center pb-4 pt-2">
+        <Pagination count={10} shape="rounded" onChange={handlePageChange} />
+      </div>
     </div>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps<HomeProps> = async (context) => {
+  const page = context.query.page || 1;
+
   try {
-    const movies = await getMoviesLatest();
-    // console.log(movies);
+    const movies = await getMoviesLatest(page);
     return {
       props: {
         movies,
