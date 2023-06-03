@@ -10,3 +10,9 @@ export interface Movie {
 export interface HomeProps {
   movies: Movie[];
 }
+
+export interface MetaHead {
+  title?: string;
+  keywords?: string;
+  description?: string;
+}

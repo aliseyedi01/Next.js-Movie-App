@@ -1,3 +1,4 @@
+import PageMetaHead from "@/component/Head/PageMetaHead";
 import ResponsiveAppBar from "@/component/Header/Header";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
@@ -19,6 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <div>
       <ResponsiveAppBar />
+      <PageMetaHead />
       <main className={`${ubuntu.variable} ${sigmar.variable} font-sans`}>
         <Component {...pageProps} />
       </main>
