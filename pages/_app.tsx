@@ -1,5 +1,6 @@
 import PageMetaHead from "@/component/Head/PageMetaHead";
 import ResponsiveAppBar from "@/component/Header/Header";
+import { MoviesProvider } from "@/state/movieReducer";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { Sigmar, Ubuntu } from "next/font/google";
@@ -18,12 +19,14 @@ const sigmar = Sigmar({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div>
-      <ResponsiveAppBar />
-      <PageMetaHead />
-      <main className={`${ubuntu.variable} ${sigmar.variable} font-sans`}>
-        <Component {...pageProps} />
-      </main>
-    </div>
+    <MoviesProvider>
+      <div>
+        <ResponsiveAppBar />
+        <PageMetaHead />
+        <main className={`${ubuntu.variable} ${sigmar.variable} font-sans`}>
+          <Component {...pageProps} />
+        </main>
+      </div>
+    </MoviesProvider>
   );
 }

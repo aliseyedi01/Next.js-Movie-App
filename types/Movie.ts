@@ -16,3 +16,14 @@ export interface MetaHead {
   keywords?: string;
   description?: string;
 }
+
+export interface SaveMovie {
+  id: number;
+  title: string;
+  year: string;
+  country: string;
+  poster: string;
+  imdb_rating: string;
+  genres: string[];
+  images: string[];
+}

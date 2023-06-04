@@ -1,11 +1,24 @@
 import PageMetaHead from "@/component/Head/PageMetaHead";
-import React from "react";
+import React, { useContext } from "react";
+import { SaveMovie } from "@/types/Movie";
+import { MoviesContext } from "@/state/movieReducer";
+import ListMovies from "@/component/Movies/ListMovies";
 
-export default function WatchList() {
+interface WatchListProps {
+  movies: SaveMovie[];
+}
+
+const WatchList: React.FC<WatchListProps> = () => {
+  const { state } = useContext(MoviesContext);
+
+  console.log(state.movies);
+
   return (
     <div>
       <PageMetaHead title="WatchList" />
-      watchlist
+      <ListMovies movies={state.movies} />
     </div>
   );
-}
+};
+
+export default WatchList;
