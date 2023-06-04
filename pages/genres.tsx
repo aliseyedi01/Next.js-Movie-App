@@ -2,10 +2,12 @@ import { getListGenres } from "@/Services/moviesapi";
 import PageMetaHead from "@/component/Head/PageMetaHead";
 import { Genres, ListGenres } from "@/types/Genres";
 import { GetStaticProps } from "next";
+import { useRouter } from "next/router";
 import React from "react";
 
 export default function Genres({ genres }: ListGenres): JSX.Element {
-  console.log(genres);
+  const router = useRouter();
+
   return (
     <div>
       <PageMetaHead title="Genres" />
@@ -15,6 +17,9 @@ export default function Genres({ genres }: ListGenres): JSX.Element {
             <div
               key={genre.id}
               className="duration-400 grid h-44 cursor-pointer place-content-center rounded-lg border-2 border-blue-300 bg-sky-200 font-ubuntu text-lg transition-all hover:border-indigo-700 hover:text-2xl hover:font-bold "
+              onClick={() => {
+                router.push(`/genres/${genre.id}?page=1`);
+              }}
             >
               {genre.name}
             </div>
@@ -27,6 +32,6 @@ export default function Genres({ genres }: ListGenres): JSX.Element {
 
 export const getStaticProps: GetStaticProps<ListGenres> = async () => {
   const genres = await getListGenres();
-  console.log("genres", genres);
+  // console.log("genres", genres);
   return { props: { genres } };
 };

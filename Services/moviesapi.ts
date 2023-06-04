@@ -12,3 +12,11 @@ export async function getListGenres(): Promise<Genres[]> {
   const data = await res.json();
   return data;
 }
+
+export async function getSingleGenre(page: string, id: string): Promise<Movie[]> {
+  const res = await fetch(`https://moviesapi.ir/api/v1/genres/${id}/movies?page=${page}`);
+  const dataObject = await res.json();
+  const data = dataObject.data;
+  // console.log("1", data);
+  return data;
+}
