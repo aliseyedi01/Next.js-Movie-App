@@ -9,15 +9,17 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import Image from "next/image";
 import { Suspense } from "react";
 import { Grid, Skeleton } from "@mui/material";
-import { HomeProps } from "@/types/Movie";
+import { HomeProps, SaveMovie } from "@/types/Movie";
 import TurnedInIcon from "@mui/icons-material/TurnedIn";
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 import IconButton from "@mui/material/IconButton";
 import { MoviesContext } from "@/state/movieReducer";
+import { useRouter } from "next/router";
 
 export default function ListMovies({ movies }: HomeProps) {
   const [bookmarkStatus, setBookmarkStatus] = useState(Array(movies.length).fill(false));
   const { dispatch } = useContext(MoviesContext);
+  const router = useRouter();
 
   const handleBookmarkToggle = (index: number) => {
     setBookmarkStatus((prevStatus) => {
@@ -33,6 +35,10 @@ export default function ListMovies({ movies }: HomeProps) {
 
       return updatedStatus;
     });
+  };
+
+  const handleSingleMovie = (id: number) => {
+    router.push(`/movie/${id}`);
   };
   return (
     <ul className=" grid grid-cols-1 place-items-center gap-4 p-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 ">
@@ -79,7 +85,9 @@ export default function ListMovies({ movies }: HomeProps) {
                 >
                   {bookmarkStatus[index] ? <TurnedInIcon /> : <TurnedInNotIcon />}
                 </IconButton>
-                <Button size="small">Learn More</Button>
+                <Button size="small" onClick={() => handleSingleMovie(movie.id)}>
+                  Learn More
+                </Button>
               </div>
             </CardActions>
           </Card>
