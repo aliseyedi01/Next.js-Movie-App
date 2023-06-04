@@ -15,18 +15,48 @@ import { Skeleton } from "@mui/material";
 import { Movie } from "@/types/Movie";
 
 export default function Discover() {
-  const [name, setName] = React.useState("");
+  const [name, setName] = React.useState("ali");
   const [movies, setMovies] = React.useState<Movie[]>([]);
+  const [page, setPage] = React.useState(1);
   console.log(name);
 
   useEffect(() => {
+    let cancelRequest = false;
+
     const fetchMovies = async () => {
-      const movies = await getMovieName("1", name);
-      setMovies(movies);
-      console.log(movies);
+      if (name === "") {
+        setPage(1);
+        setMovies([]);
+      } else {
+        const newMovies = await getMovieName(page.toString(), name);
+        if (!cancelRequest) {
+          if (page === 1) {
+            setMovies(newMovies);
+          } else {
+            setMovies((prevMovies) => [...prevMovies, ...newMovies]);
+          }
+        }
+      }
     };
     fetchMovies();
-  }, [name]);
+    return () => {
+      cancelRequest = true;
+    };
+  }, [page, name]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+      if (scrollTop + clientHeight >= scrollHeight) {
+        setPage((prevPage) => prevPage + 1);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div>
@@ -44,10 +74,11 @@ export default function Discover() {
           }}
         />
       </div>
+
       <div>
         <ul className="  lg:grid-cols-5ssss grid grid-cols-1 place-items-center gap-3 p-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5  ">
-          {movies.map((movie) => (
-            <li key={movie.id}>
+          {movies.map((movie, index) => (
+            <li key={index}>
               <Card sx={{ maxWidth: 345 }}>
                 <Suspense
                   fallback={
