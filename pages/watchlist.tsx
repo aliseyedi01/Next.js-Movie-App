@@ -14,7 +14,7 @@ const WatchList: React.FC<WatchListProps> = () => {
   console.log(state.movies);
 
   return (
-    <div>
+    <div className="h-screen dark:bg-indigo-950">
       <PageMetaHead title="WatchList" />
       <ListMovies movies={state.movies} />
     </div>

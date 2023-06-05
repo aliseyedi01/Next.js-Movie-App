@@ -50,18 +50,24 @@ export default function Discover() {
   }, []);
 
   return (
-    <div>
+    <div className="h-screen  dark:bg-indigo-950">
       <PageMetaHead title="Discover" />
-      <div className="mx-auto w-2/6 p-4">
+      <div className="mx-auto w-2/6 p-4 dark:text-sky-100  ">
         <TextField
           fullWidth
           label="Movie Name"
           id="fullWidth"
           value={name}
           autoComplete="off"
-          className=" "
+          className=" rounded-md dark:bg-sky-200"
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setName(event.target.value);
+          }}
+          sx={{
+            "& label": {
+              color: "#8484ff",
+              fontWeight: "bold",
+            },
           }}
         />
       </div>

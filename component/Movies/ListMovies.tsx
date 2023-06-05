@@ -41,10 +41,10 @@ export default function ListMovies({ movies }: HomeProps) {
     router.push(`/movie/${id}`);
   };
   return (
-    <ul className=" grid grid-cols-1 place-items-center gap-4 p-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 ">
+    <ul className=" grid grid-cols-1 place-items-center gap-4  p-5 dark:bg-indigo-950 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
       {movies.map((movie, index) => (
         <li key={movie.id} className=" transition-all duration-150 hover:scale-[1.02]">
-          <Card sx={{ maxWidth: 345 }}>
+          <Card sx={{ maxWidth: 345 }} className="dark:bg-slate-700">
             <Suspense
               fallback={
                 <Skeleton
@@ -62,30 +62,35 @@ export default function ListMovies({ movies }: HomeProps) {
                 gutterBottom
                 variant="h5"
                 component="div"
-                className="w-52 truncate font-ubuntu text-lg font-bold text-indigo-900"
+                className="w-52 truncate font-ubuntu text-lg font-bold text-indigo-900 dark:text-indigo-200"
               >
                 {movie.title}
               </Typography>
-              <Typography className="font-mono text-sm text-indigo-900">
-                <CalendarMonthIcon className="text-xl" /> Years: {movie.year}
+              <Typography className="font-mono text-sm text-indigo-900 dark:text-indigo-300">
+                <CalendarMonthIcon className="text-xl dark:text-yellow-200" /> Years: {movie.year}
               </Typography>
-              <Typography className="w-52 truncate font-mono text-sm text-indigo-900">
-                <PublicIcon className="text-xl" /> Country: {movie.country}
+              <Typography className="w-52 truncate font-mono text-sm text-indigo-900 dark:text-indigo-300">
+                <PublicIcon className="text-xl dark:text-yellow-200" /> Country: {movie.country}
               </Typography>
             </CardContent>
             <CardActions className="flex flex-row-reverse  justify-between">
-              <Typography className="w-9 cursor-default rounded-lg border-2 bg-sky-200 p-1">
+              <Typography className="w-9 cursor-default rounded-lg border-2 bg-sky-200 p-1 dark:bg-indigo-700 dark:text-white/90">
                 {movie.imdb_rating}
               </Typography>
               <div className=" flex justify-start">
                 <IconButton
                   aria-label="fingerprint"
                   color="secondary"
+                  className="dark:text-yellow-300"
                   onClick={() => handleBookmarkToggle(index)}
                 >
                   {bookmarkStatus[index] ? <TurnedInIcon /> : <TurnedInNotIcon />}
                 </IconButton>
-                <Button size="small" onClick={() => handleSingleMovie(movie.id)}>
+                <Button
+                  size="small"
+                  onClick={() => handleSingleMovie(movie.id)}
+                  className="dark:text-slate-200"
+                >
                   Learn More
                 </Button>
               </div>

@@ -16,8 +16,13 @@ export default function Home({ movies }: HomeProps): JSX.Element {
   return (
     <div>
       <ListMovies movies={movies} />
-      <div className="grid place-content-center pb-4 pt-2">
-        <Pagination count={10} shape="rounded" onChange={handlePageChange} />
+      <div className="grid place-content-center  pb-6 pt-2 dark:bg-indigo-950 ">
+        <Pagination
+          count={10}
+          shape="rounded"
+          onChange={handlePageChange}
+          className="rounded-md dark:bg-sky-300 "
+        />
       </div>
     </div>
   );

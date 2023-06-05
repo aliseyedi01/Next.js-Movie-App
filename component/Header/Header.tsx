@@ -12,6 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MovieIcon from "@mui/icons-material/Movie";
 import Link from "next/link";
 import NextLink from "next/link";
+import DarkMode from "./DarkMode";
 
 const pages = [
   { title: "Home", href: "/" },
@@ -32,7 +33,7 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className="dark:bg-indigo-700">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <MovieIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -124,6 +125,7 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
+          <DarkMode />
         </Toolbar>
       </Container>
     </AppBar>

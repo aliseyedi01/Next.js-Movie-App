@@ -25,7 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <ResponsiveAppBar />
         <PageMetaHead />
         <main className={`${ubuntu.variable} ${sigmar.variable} font-sans`}>
-          <NextNProgress color="#182C61" />
+          <NextNProgress color="#0fbcf9" />
           <Component {...pageProps} />
         </main>
       </div>
