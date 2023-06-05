@@ -6,6 +6,7 @@ import PublicIcon from "@mui/icons-material/Public";
 import LocalMoviesIcon from "@mui/icons-material/LocalMovies";
 import PersonIcon from "@mui/icons-material/Person";
 import Image from "next/image";
+import { CircularProgress } from "@mui/material";
 
 export default function SingleMovie() {
   const router = useRouter();
@@ -16,7 +17,6 @@ export default function SingleMovie() {
   console.log(movie);
 
   const movieId: string = router.query.singlemovie;
-  //   console.log(movieId, typeof movieId);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -28,9 +28,9 @@ export default function SingleMovie() {
   }, []);
 
   return (
-    <div className=" md:p-3">
+    <div>
       {movie ? (
-        <div className="flex flex-col justify-center md:flex-row ">
+        <div className="flex flex-col justify-center md:flex-row md:p-3 ">
           <div className="flex  items-center justify-center md:justify-normal ">
             <Image
               src={movie.poster}
@@ -86,7 +86,9 @@ export default function SingleMovie() {
           </div>
         </div>
       ) : (
-        <p>Loading movie information...</p>
+        <div className="grid h-[91.5vh] w-full place-content-center  md:h-[89.5vh]">
+          <CircularProgress color="info" className="" />
+        </div>
       )}
     </div>
   );

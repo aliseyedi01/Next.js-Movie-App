@@ -4,6 +4,7 @@ import { MoviesProvider } from "@/state/movieReducer";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { Sigmar, Ubuntu } from "next/font/google";
+import NextNProgress from "nextjs-progressbar";
 
 const ubuntu = Ubuntu({
   subsets: ["latin"],
@@ -24,6 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <ResponsiveAppBar />
         <PageMetaHead />
         <main className={`${ubuntu.variable} ${sigmar.variable} font-sans`}>
+          <NextNProgress color="#182C61" />
           <Component {...pageProps} />
         </main>
       </div>

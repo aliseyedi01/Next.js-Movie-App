@@ -1,3 +1,11 @@
 {
-  "cSpell.ignoreWords": ["imdb", "metascore", "moviesapi", "sigmar", "singlemovie", "watchlist"]
+  "cSpell.ignoreWords": [
+    "imdb",
+    "metascore",
+    "moviesapi",
+    "nextjs",
+    "sigmar",
+    "singlemovie",
+    "watchlist"
+  ]
 }
