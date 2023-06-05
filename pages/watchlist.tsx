@@ -11,8 +11,6 @@ interface WatchListProps {
 const WatchList: React.FC<WatchListProps> = () => {
   const { state } = useContext(MoviesContext);
 
-  console.log(state.movies);
-
   return (
     <div className="h-screen dark:bg-indigo-950">
       <PageMetaHead title="WatchList" />

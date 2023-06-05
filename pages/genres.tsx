@@ -32,6 +32,5 @@ export default function Genres({ genres }: ListGenres): JSX.Element {
 
 export const getStaticProps: GetStaticProps<ListGenres> = async () => {
   const genres = await getListGenres();
-  // console.log("genres", genres);
   return { props: { genres } };
 };

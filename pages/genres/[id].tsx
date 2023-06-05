@@ -27,13 +27,9 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (context)
   const page = context.query.page || 1;
   const id = parseInt(context.query.id as string) || 1;
 
-  // console.log(context.query);
-  // console.log("Page:", page);
-  // console.log("ID:", id);
-
   try {
     const movies = await getSingleGenre(page, id);
-    // console.log("2", movies);
+
     return {
       props: {
         movies,
@@ -41,7 +37,6 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (context)
       },
     };
   } catch (error) {
-    // console.error(error);
     return {
       props: {
         movies: [],

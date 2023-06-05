@@ -55,8 +55,6 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 export default function DarkMode() {
   const [darkMode, handleThemeChange] = useDarkMode();
 
-  //   console.log("is Dark", darkMode);
-
   return (
     <>
       <FormControlLabel

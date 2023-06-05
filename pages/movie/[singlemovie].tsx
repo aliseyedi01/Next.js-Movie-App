@@ -10,11 +10,8 @@ import { CircularProgress } from "@mui/material";
 
 export default function SingleMovie() {
   const router = useRouter();
-  //   console.log(router.query.singlemovie);
 
   const [movie, setMovie] = React.useState<MovieInfo>();
-
-  console.log(movie);
 
   const movieId: string = router.query.singlemovie;
 

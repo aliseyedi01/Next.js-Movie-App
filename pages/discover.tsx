@@ -9,7 +9,6 @@ export default function Discover() {
   const [name, setName] = React.useState("ali");
   const [movies, setMovies] = React.useState<Movie[]>([]);
   const [page, setPage] = React.useState(1);
-  console.log(name);
 
   useEffect(() => {
     let cancelRequest = false;
