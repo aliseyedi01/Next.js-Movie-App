@@ -9,7 +9,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import Image from "next/image";
 import { Suspense } from "react";
 import { Grid, Skeleton } from "@mui/material";
-import { HomeProps, SaveMovie } from "@/types/Movie";
+import { HomeProps, Movie, SaveMovie } from "@/types/Movie";
 import TurnedInIcon from "@mui/icons-material/TurnedIn";
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 import IconButton from "@mui/material/IconButton";
@@ -17,24 +17,34 @@ import { MoviesContext } from "@/state/movieReducer";
 import { useRouter } from "next/router";
 
 export default function ListMovies({ movies }: HomeProps) {
-  const [bookmarkStatus, setBookmarkStatus] = useState(Array(movies.length).fill(false));
+  const [bookmarkedMovies, setBookmarkedMovies] = useState<Movie[]>([]);
   const { dispatch } = useContext(MoviesContext);
+  console.log("bookmarkedMovies", bookmarkedMovies);
+  const isBookMark: boolean = true;
   const router = useRouter();
 
-  const handleBookmarkToggle = (index: number) => {
-    setBookmarkStatus((prevStatus) => {
-      const updatedStatus = [...prevStatus];
-      updatedStatus[index] = !prevStatus[index];
+  const isMovieBookmarked = (id: number) => {
+    return bookmarkedMovies.some((movie) => movie.id === id);
+  };
 
-      const movie = movies[index];
-      if (updatedStatus[index]) {
-        dispatch({ type: "ADD_MOVIE", payload: movie });
-      } else {
-        dispatch({ type: "REMOVE_MOVIE", payload: movie });
-      }
+  const handleBookmarkToggle = (movie: Movie) => {
+    const updatedBookmarkedMovies = [...bookmarkedMovies];
+    const index = updatedBookmarkedMovies.findIndex((m) => m.id === movie.id);
 
-      return updatedStatus;
-    });
+    if (index === -1) {
+      updatedBookmarkedMovies.push(movie);
+      dispatch({ type: "ADD_MOVIE", payload: { ...movie, isBookMark: true } });
+    } else {
+      updatedBookmarkedMovies.splice(index, 1);
+      dispatch({ type: "REMOVE_MOVIE", payload: { ...movie, isBookMark: false } });
+    }
+
+    if (movie.isBookMark === true) {
+      console.log("ali");
+      dispatch({ type: "REMOVE_MOVIE", payload: { ...movie, isBookMark: false } });
+    }
+
+    setBookmarkedMovies(updatedBookmarkedMovies);
   };
 
   const handleSingleMovie = (id: number) => {
@@ -82,9 +92,13 @@ export default function ListMovies({ movies }: HomeProps) {
                   aria-label="fingerprint"
                   color="secondary"
                   className="dark:text-yellow-300"
-                  onClick={() => handleBookmarkToggle(index)}
+                  onClick={() => handleBookmarkToggle(movie)}
                 >
-                  {bookmarkStatus[index] ? <TurnedInIcon /> : <TurnedInNotIcon />}
+                  {isMovieBookmarked(movie.id) || movie.isBookMark ? (
+                    <TurnedInIcon />
+                  ) : (
+                    <TurnedInNotIcon />
+                  )}
                 </IconButton>
                 <Button
                   size="small"

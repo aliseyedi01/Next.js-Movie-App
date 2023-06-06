@@ -1,8 +1,9 @@
 export interface Movie {
-  id: string;
+  id: string | number;
   title: string;
   year: number;
   country: string;
+  isBookMark?: boolean;
   poster: string;
   imdb_rating: number;
 }
@@ -23,6 +24,7 @@ export interface SaveMovie {
   year: string;
   country: string;
   poster: string;
+  isBookmarked?: boolean;
   imdb_rating: string;
   genres: string[];
   images: string[];

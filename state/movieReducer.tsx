@@ -7,20 +7,21 @@ interface MoviesState {
 
 const initialState: MoviesState = {
   movies: [
-    {
-      id: 36,
-      title: "The Green Mile",
-      poster: "https://moviesapi.ir/images/tt0120689_poster.jpg",
-      year: "1999",
-      country: "USA",
-      imdb_rating: "8.5",
-      genres: ["Crime", "Drama", "Fantasy"],
-      images: [
-        "https://moviesapi.ir/images/tt0120689_screenshot1.jpg",
-        "https://moviesapi.ir/images/tt0120689_screenshot2.jpg",
-        "https://moviesapi.ir/images/tt0120689_screenshot3.jpg",
-      ],
-    },
+    // {
+    //   id: 36,
+    //   title: "The Green Mile",
+    //   poster: "https://moviesapi.ir/images/tt0120689_poster.jpg",
+    //   year: "1999",
+    //   country: "USA",
+    //   imdb_rating: "8.5",
+    //   isBookmarked: true,
+    //   genres: ["Crime", "Drama", "Fantasy"],
+    //   images: [
+    //     "https://moviesapi.ir/images/tt0120689_screenshot1.jpg",
+    //     "https://moviesapi.ir/images/tt0120689_screenshot2.jpg",
+    //     "https://moviesapi.ir/images/tt0120689_screenshot3.jpg",
+    //   ],
+    // },
   ],
 };
 
@@ -53,7 +54,7 @@ function reducer(state: MoviesState, action: Action) {
   }
 }
 
-interface MoviesContextProps {
+export interface MoviesContextProps {
   state: MoviesState;
   dispatch: Dispatch<Action>;
 }
