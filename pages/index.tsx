@@ -1,16 +1,15 @@
 import { getMoviesLatest } from "@/Services/moviesapi";
 import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
 import * as React from "react";
-import Pagination from "@mui/material/Pagination";
 import { useRouter } from "next/router";
-import { HomeProps } from "@/types/Movie";
+import { HomeProps, PageChangeHandler } from "@/types/Movie";
 import ListMovies from "@/component/Movies/ListMovies";
 import PaginationButtons from "@/component/Utility/PaginationButtons";
 
 export default function Home({ movies }: HomeProps): JSX.Element {
   const router = useRouter();
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+  const handlePageChange: PageChangeHandler["handlePageChange"] = (event, page) => {
     router.push(`/?page=${page}`);
   };
 
@@ -23,7 +22,7 @@ export default function Home({ movies }: HomeProps): JSX.Element {
 }
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async (context) => {
-  const page = context.query.page || 1;
+  const page = String(context.query.page) || "1";
 
   try {
     const movies = await getMoviesLatest(page);

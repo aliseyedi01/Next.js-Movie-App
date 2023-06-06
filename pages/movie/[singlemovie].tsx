@@ -13,7 +13,7 @@ export default function SingleMovie() {
 
   const [movie, setMovie] = React.useState<MovieInfo>();
 
-  const movieId: string = router.query.singlemovie;
+  const movieId = String(router.query.singlemovie);
 
   useEffect(() => {
     const fetchMovies = async () => {

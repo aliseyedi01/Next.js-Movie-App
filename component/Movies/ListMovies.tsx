@@ -19,11 +19,9 @@ import { useRouter } from "next/router";
 export default function ListMovies({ movies }: HomeProps) {
   const [bookmarkedMovies, setBookmarkedMovies] = useState<Movie[]>([]);
   const { dispatch } = useContext(MoviesContext);
-  console.log("bookmarkedMovies", bookmarkedMovies);
-  const isBookMark: boolean = true;
   const router = useRouter();
 
-  const isMovieBookmarked = (id: number) => {
+  const isMovieBookmarked = (id: number | string) => {
     return bookmarkedMovies.some((movie) => movie.id === id);
   };
 
@@ -40,19 +38,18 @@ export default function ListMovies({ movies }: HomeProps) {
     }
 
     if (movie.isBookMark === true) {
-      console.log("ali");
       dispatch({ type: "REMOVE_MOVIE", payload: { ...movie, isBookMark: false } });
     }
 
     setBookmarkedMovies(updatedBookmarkedMovies);
   };
 
-  const handleSingleMovie = (id: number) => {
+  const handleSingleMovie = (id: number | string) => {
     router.push(`/movie/${id}`);
   };
   return (
     <ul className=" grid grid-cols-1 place-items-center gap-4  p-5 dark:bg-indigo-950 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-      {movies.map((movie, index) => (
+      {movies?.map((movie, index) => (
         <li key={movie.id} className=" transition-all duration-150 hover:scale-[1.02]">
           <Card sx={{ maxWidth: 345 }} className="dark:bg-slate-700">
             <Suspense

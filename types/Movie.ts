@@ -1,37 +1,36 @@
+export interface HomeProps {
+  movies: Movie[];
+}
+
 export interface Movie {
   id: string | number;
   title: string;
-  year: number;
+  year: string | number;
   country: string;
   isBookMark?: boolean;
   poster: string;
-  imdb_rating: number;
+  imdb_rating: string;
 }
 
-export interface HomeProps {
-  movies: Movie[];
+export interface SingleMovie {
+  movie: SaveMovie[];
+}
+export interface SaveMovie {
+  id: string | number;
+  title: string;
+  year: string;
+  country: string;
+  poster: string;
+  isBookMark?: boolean;
+  imdb_rating: string;
+  genres?: string[];
+  images?: string[];
 }
 
 export interface MetaHead {
   title?: string;
   keywords?: string;
   description?: string;
-}
-
-export interface SaveMovie {
-  id: number;
-  title: string;
-  year: string;
-  country: string;
-  poster: string;
-  isBookmarked?: boolean;
-  imdb_rating: string;
-  genres: string[];
-  images: string[];
-}
-
-export interface SingleMovie {
-  movie: SaveMovie[];
 }
 
 export interface MovieInfo {
@@ -55,4 +54,8 @@ export interface MovieInfo {
   type: string;
   genres: string[];
   images: string[];
+}
+
+export interface PageChangeHandler {
+  handlePageChange: (event: React.ChangeEvent<unknown>, page: number) => void;
 }

@@ -1,11 +1,11 @@
 import PageMetaHead from "@/component/Head/PageMetaHead";
 import React, { useContext } from "react";
-import { SaveMovie } from "@/types/Movie";
+import { Movie, SaveMovie } from "@/types/Movie";
 import { MoviesContext } from "@/state/movieReducer";
 import ListMovies from "@/component/Movies/ListMovies";
 
 interface WatchListProps {
-  movies: SaveMovie[];
+  movies: Movie[];
 }
 
 const WatchList: React.FC<WatchListProps> = () => {
