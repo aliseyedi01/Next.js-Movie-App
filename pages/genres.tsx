@@ -11,7 +11,7 @@ export default function Genres({ genres }: ListGenres): JSX.Element {
   return (
     <div>
       <PageMetaHead title="Genres" />
-      <ul className="grid h-full w-full grid-cols-7 grid-rows-3  gap-x-3 gap-y-5  p-3 dark:bg-indigo-950">
+      <ul className="grid h-full w-full grid-cols-7 grid-rows-3 gap-x-3  gap-y-5 p-3  dark:bg-indigo-950 md:h-[calc(100vh-68.5px)]">
         {genres.map((genre) => (
           <li>
             <div
