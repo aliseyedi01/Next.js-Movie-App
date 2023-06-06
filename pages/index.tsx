@@ -5,6 +5,7 @@ import Pagination from "@mui/material/Pagination";
 import { useRouter } from "next/router";
 import { HomeProps } from "@/types/Movie";
 import ListMovies from "@/component/Movies/ListMovies";
+import PaginationButtons from "@/component/Utility/PaginationButtons";
 
 export default function Home({ movies }: HomeProps): JSX.Element {
   const router = useRouter();
@@ -16,14 +17,7 @@ export default function Home({ movies }: HomeProps): JSX.Element {
   return (
     <div>
       <ListMovies movies={movies} />
-      <div className="grid place-content-center  pb-6 pt-2 dark:bg-indigo-950 ">
-        <Pagination
-          count={10}
-          shape="rounded"
-          onChange={handlePageChange}
-          className="rounded-md dark:bg-sky-300 "
-        />
-      </div>
+      <PaginationButtons handlePageChange={handlePageChange} />
     </div>
   );
 }

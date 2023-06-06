@@ -1,10 +1,10 @@
 import React from "react";
 import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
 import { getSingleGenre } from "@/Services/moviesapi";
-import Pagination from "@mui/material/Pagination";
 import { HomeProps } from "@/types/Movie";
 import { useRouter } from "next/router";
 import ListMovies from "@/component/Movies/ListMovies";
+import PaginationButtons from "@/component/Utility/PaginationButtons";
 
 export default function SingleGenre({ movies }: HomeProps, id: number): JSX.Element {
   const router = useRouter();
@@ -16,9 +16,7 @@ export default function SingleGenre({ movies }: HomeProps, id: number): JSX.Elem
   return (
     <div>
       <ListMovies movies={movies} />
-      <div className="grid place-content-center pb-4 pt-2">
-        <Pagination count={10} shape="rounded" onChange={handlePageChange} />
-      </div>
+      <PaginationButtons handlePageChange={handlePageChange} />
     </div>
   );
 }
