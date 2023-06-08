@@ -50,7 +50,7 @@ export default function ListMovies({ movies }: HomeProps) {
   return (
     <ul className=" grid grid-cols-1 place-items-center gap-4  p-5 dark:bg-indigo-950 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
       {movies?.map((movie, index) => (
-        <li key={movie.id} className=" transition-all duration-150 hover:scale-[1.02]">
+        <li key={movie.id} className="  transition-all duration-150 hover:scale-[1.02]">
           <Card sx={{ maxWidth: 345 }} className="dark:bg-slate-700">
             <Suspense
               fallback={
@@ -62,7 +62,13 @@ export default function ListMovies({ movies }: HomeProps) {
                 />
               }
             >
-              <Image src={movie.poster} alt="movie" width={345} height={550} />
+              <Image
+                src={movie.poster}
+                alt="movie"
+                width={345}
+                height={550}
+                className="h-52 w-full md:h-full md:w-full"
+              />
             </Suspense>
             <CardContent>
               <Typography
